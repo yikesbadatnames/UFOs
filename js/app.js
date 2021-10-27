@@ -21,3 +21,24 @@ function buildTable(data) {
         );
     });
 }
+
+// adding filters
+function handleClick(){
+    let date = d3.select("#datetime").property("value");
+    let filteredData= tableData;
+
+    // check if date is entered and filter
+    if (date){
+        filteredData = filteredData.filter(row => row.datetime === date);
+    }
+
+    // rebuild the table using the filtered data
+    buildTable(filteredData);
+}
+
+// attach an event to listen for the form button
+// Note is this right???? handleclick looks weird. 
+d3.selectAll("#filter-btn").on("click", handleClick);
+
+// build the table when the page loads
+buildTable(tableData);
